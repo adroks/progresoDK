@@ -1,13 +1,13 @@
 ﻿var progressDK = new Class({
 	Implements: [Options, Events],
 	options: {
-		urlCrawl: '' // url del fichero que generará el array
-		, dataCrawl: '' //si necesitamos algún query para extraer datos
-		, urlCreate: '' // url del fichero que realizará la acción de cada elemento del array
-		, synch: 5 // numero de tareas a la vez
-		, mode: 'default' // modo lista o modo único
-		, funcion: false // podemos pasarle una función que se ejecutará en vez de urlCreate
-		, phrase: '<b>[value]</b> scanned' // esta frase se mostrará cuando se termine de ejecutar cada elemento
+		urlCrawl: ''		// url del fichero que generará el array
+		, dataCrawl: ''		//si necesitamos algún query para extraer datos
+		, urlCreate: ''		// url del fichero que realizará la acción de cada elemento del array
+		, synch: 5			// numero de tareas a la vez
+		, mode: 'default'	// modo lista o modo único
+		, loopFunction: false	// podemos pasarle una función que se ejecutará en vez de urlCreate
+		, phrase: '<b>[value]</b> scanned'	// esta frase se mostrará cuando se termine de ejecutar cada elemento
 					// [value] se sustituirá por el valor de la primera variable del elemento 
 	}
 	/* las variables que saquemos de cada elemento en urlCrawl, serán las mismas que pidamos en el urlCreate*/
@@ -90,8 +90,8 @@
 			if(!this.stop && !this.pause && number<this.array.length){
 				this.queue++;
 				this.next++;
-				if(this.options.funcion){
-					this.dkSuccess(this.options.funcion(this.array[number]));
+				if(this.options.loopFunction){
+					this.dkSuccess(this.options.loopFunction(this.array[number]));
 				}else{
 					this.dkRequest(number);
 				}
