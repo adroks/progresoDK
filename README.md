@@ -8,17 +8,18 @@ Recorreremos esa lista, actualizando la interfaz según el porcentaje, e informa
 
 Este script nos servirá para, por ejemplo, extraer información de una BBDD y actualizar o crear ficheros por separado en un tiempo menor que si lo hiciesemos en una sola consulta, evitando errores de "Time Out".
 
-IMPORTANTE
+Importante
 ==========
-Necesario Mootools More con Request.JSONP
+- Necesario Mootools More con Request.JSONP
+- En los ejemplos, se ha utilizado ASP, se puede adaptar según el lenguaje de programación.
 
-USO
+Uso
 ===
-	new progressDK(elemento, { //será la ID del elemento donde queremos crear la interfaz de progreso
-		urlCrawl: '/example/example.json'
-		, dataCrawl: 'id=1' //si necesitamos algún query para extraer datos
-		, urlCreate: '/example/create.asp' // url del fichero que realizará la acción de cada elemento del array
-		, synch: 5 // numero de tareas a la vez
-		, mode: 'default' // modo lista o modo único
-		, funcion: false // podemos pasarle una función que se ejecutará en vez de urlCreate
+	new progressDK(elemento, { /*será el ID del elemento donde queremos crear la interfaz de progreso*/
+		urlCrawl: '/example/example.json' /*la url del archivo que generará el array*/
+		, dataCrawl: 'id=1' /*si necesitamos algún query para extraer datos*/
+		, urlCreate: '/example/create.asp' /*url del fichero que realizará la acción de cada elemento del array*/
+		, synch: 5 /* numero de tareas a la vez*/
+		, mode: 'default' /* modo lista o modo único*/
+		, funcion: false /* podemos pasarle una función que se ejecutará en vez de urlCreate*/
 	});
