@@ -28,7 +28,7 @@
 	createUI: function(){//creamos los elementos, si ya existen los asignamos a sus variables
 		if(this.elementContainer.get('data-progress')){
 			this.pdkContainer	= this.elementContainer.getElements('.pdkContainer')[0];
-			this.pdkContainer.setStyles({'display':'block'});
+			this.show()
 			this.pdkLog		= this.pdkContainer.getElements('.pdkLog')[0];
 			this.pdkBar		= this.pdkContainer.getElements('.pdkBar')[0];
 			this.pdkPercent		= this.pdkContainer.getElements('.pdkPercent')[0];
@@ -133,5 +133,8 @@
 	hide: function(){//vaciamos y ocultamos el contenedor
 		this.pdkLog.empty();
 		this.pdkContainer.setStyles({'display':'none'});
+	},
+	show: function(){//mostramos el contenedor
+		this.pdkContainer.setStyles({'display': 'block'});
 	}
 });
