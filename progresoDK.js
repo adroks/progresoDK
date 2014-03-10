@@ -4,10 +4,9 @@
 		urlCrawl: '' // url del fichero que generará el array
 		, dataCrawl: '' //si necesitamos algún query para extraer datos
 		, urlCreate: '' // url del fichero que realizará la acción de cada elemento del array
-		, synch: 5 // numero de tareas
-		, time: 1500
-		, mode: 'default' //
-		, funcion: false
+		, synch: 5 // numero de tareas a la vez
+		, mode: 'default' // modo lista o modo único
+		, funcion: false // podemos pasarle una función que se ejecutará en vez de urlCreate
 	}
 	,initialize: function(container, opciones){
 		this.setOptions(opciones);
@@ -29,13 +28,13 @@
 		if(this.elementContainer.get('data-progress')){
 			this.pdkContainer	= this.elementContainer.getElements('.pdkContainer')[0];
 			this.pdkContainer.setStyles({'display':'block'});
-			this.pdkLog			= this.pdkContainer.getElements('.pdkLog')[0];
-			this.pdkBar			= this.pdkContainer.getElements('.pdkBar')[0];
+			this.pdkLog		= this.pdkContainer.getElements('.pdkLog')[0];
+			this.pdkBar		= this.pdkContainer.getElements('.pdkBar')[0];
 			this.pdkPercent		= this.pdkContainer.getElements('.pdkPercent')[0];
 			this.pdkClose		= this.pdkContainer.getElements('.pdkClose')[0];
 			this.pdkPause		= this.pdkContainer.getElements('.pdkPause')[0];
-			this.stop			= false;
-			this.pause			= false;
+			this.stop		= false;
+			this.pause		= false;
 			this.pdkPause.setStyles({'display': 'block'});
 			this.log('', 1);
 		}else{
@@ -44,10 +43,10 @@
 			this.pdkClose		= new Element('input[type=button].pdkButton.pdkClose').inject(this.pdkContainer);
 			this.pdkPause		= new Element('input[type=button].pdkButton.pdkPause').inject(this.pdkContainer);
 
-			this.pdkLog			= new Element((this.isList ? 'ul' : 'span') + '.pdkLog');
+			this.pdkLog		= new Element((this.isList ? 'ul' : 'span') + '.pdkLog');
 			new Element('div.' + (this.isList ? 'pdkLogContainer' : 'pdkLogOne')).inject(this.pdkContainer).adopt(this.pdkLog);
 
-			this.pdkBar			= new Element('span.pdkBar[style=width:0%]');
+			this.pdkBar		= new Element('span.pdkBar[style=width:0%]');
 			this.pdkPercent		= new Element('span.pdkPercent[html=]');
 			new Element('div.progressBarContainer').inject(this.pdkContainer).adopt(this.pdkBar, this.pdkPercent);
 		}
