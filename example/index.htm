@@ -9,5 +9,13 @@
 <body>
 	<section id="pagina">
 	</section>
+	<script>
+		window.addEvent('domready', function(){
+			new progressDK($('pagina'), {
+				urlCrawl: 'example.json'
+				, urlCreate: ''
+			});
+		});
+	</script>
 </body>
 </html>
