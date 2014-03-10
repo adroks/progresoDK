@@ -21,14 +21,14 @@
 			this.pause	= false;
 			this.isList	= this.options.mode=='default';
 
-			this.createUI();
-			this.crawl();
+			this.dkCreateUI();
+			this.dkCrawl();
 		}
 	},
-	createUI: function(){//creamos los elementos, si ya existen los asignamos a sus variables
+	dkCreateUI: function(){//creamos los elementos, si ya existen los asignamos a sus variables
 		if(this.elementContainer.get('data-progress')){
 			this.pdkContainer	= this.elementContainer.getElements('.pdkContainer')[0];
-			this.show()
+			this.dkShow()
 			this.pdkLog		= this.pdkContainer.getElements('.pdkLog')[0];
 			this.pdkBar		= this.pdkContainer.getElements('.pdkBar')[0];
 			this.pdkPercent		= this.pdkContainer.getElements('.pdkPercent')[0];
@@ -37,7 +37,7 @@
 			this.stop		= false;
 			this.pause		= false;
 			this.pdkPause.setStyles({'display': 'block'});
-			this.log('', 1);
+			this.dkLog('', 1);
 		}else{
 			this.elementContainer.set('data-progress', '1')
 			this.pdkContainer	= new Element('div.pdkContainer').inject(this.elementContainer);
@@ -54,20 +54,20 @@
 		// asignamos los eventos a los botones
 		this.pdkClose.addEvent('click', function(){// si no ha acabado, se cancelan los siguientes request, y luego se elimina, en caso contrario se elimina directamente
 			this.stop = true;
-			if(this.done==this.length){this.hide()}
+			if(this.done==this.length){this.dkHide()}
 		}.bind(this));
 		this.pdkPause.addEvent('click', function(){
 			this.pause = !this.pause;
 			if(!this.pause){
 				this.pdkPause.removeClass('play');
-				this.loop(this.next);
+				this.dkLoop(this.next);
 			}else{
 				this.pdkPause.addClass('play');
-				this.log('Se pausará la tarea cuando acaben los request actuales.', 1);
+				this.dkLog('Se pausará la tarea cuando acaben los request actuales.', 1);
 			}
 		}.bind(this));
 	},
-	crawl: function(){//obtenemos el array por JSON
+	dkCrawl: function(){//obtenemos el array por JSON
 		new Request.JSONP({
 			url: this.options.urlCrawl,
 			callbackKey: 'co', // usar el mismo querystring al principio del JSON
@@ -75,14 +75,14 @@
 			onComplete: function(array){
 				this.array = array;
 				this.length = array.length;
-				this.loop(0);
+				this.dkLoop(0);
 			}.bind(this)
 		}).send();
 	},
-	loop: function(number){//recorremos el array
+	dkLoop: function(number){//recorremos el array
 		if(this.queue>this.options.synch){//si la cola es mayor que el limite, esperamos un segundo antes de mandar el mismo
 			(function(){
-				this.loop(number);
+				this.dkLoop(number);
 			}.bind(this)).delay(1000);
 		}else{
 			//comprobamos antes que no se haya parado, pausado y que no hayan sobrepasado el numero de elementos del array
@@ -90,39 +90,42 @@
 				this.queue++;
 				this.next++;
 				if(this.options.funcion){
-					this.success(this.options.funcion(this.array[number]));
+					this.dkSuccess(this.options.funcion(this.array[number]));
 				}else{
-					this.request(number);
+					this.dkRequest(number);
 				}
-				this.loop(this.next);
+				this.dkLoop(this.next);
 			}
 		}
 	},
-	request: function(number){
+	dkRequest: function(number){
+					console.log(this.options.urlCreate);
+					console.log(this.array[number]);
 		new Request({
 			url:	this.options.urlCreate,
 			data:	this.array[number],
 			async:	true,
 			method:	'get',
 			onSuccess: function(responseText){
-				this.success(responseText);
+					console.log(responseText);
+				this.dkSuccess(responseText);
 			}.bind(this)
 		}).send();
 	},
-	success: function(text){
+	dkSuccess: function(text){
 		this.done++;
 		this.queue--;
-		this.log(text);//mostramos el resultado de la consulta
+		this.dkLog(text);//mostramos el resultado de la consulta
 		var perc = Math.round((this.done/this.length) * 100);
 		this.pdkPercent.set('html', perc + '%');
 		this.pdkBar.setStyles({'width': perc + '%'});
 		if(this.done==this.length){//mensaje de finalizado
-			this.log('Completado, Total: <b>'+ this.length + '</b>', 1);
+			this.dkLog('Completado, Total: <b>'+ this.length + '</b>', 1);
 			this.pdkPause.setStyles({'display': 'none'});
 		}
-		if(this.stop && this.queue==0){this.hide();}
+		if(this.stop && this.queue==0){this.dkHide();}
 	},
-	log: function(text, style){
+	dkLog: function(text, style){
 		if(this.isList){
 			var li = new Element('li[html=' + text + ']').inject(this.pdkLog, 'top');
 			if(style){li.addClass('last')}
@@ -130,11 +133,11 @@
 			this.pdkLog.set('html', text);
 		}
 	},
-	hide: function(){//vaciamos y ocultamos el contenedor
+	dkHide: function(){//vaciamos y ocultamos el contenedor
 		this.pdkLog.empty();
 		this.pdkContainer.setStyles({'display':'none'});
 	},
-	show: function(){//mostramos el contenedor
+	dkShow: function(){//mostramos el contenedor
 		this.pdkContainer.setStyles({'display': 'block'});
 	}
 });

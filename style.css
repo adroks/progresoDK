@@ -16,6 +16,6 @@ ul.pdkLog{width:100%;border:none;margin:0;padding:0;list-style:none;}
 span.pdkLog{display:block;padding:1px 3px;}
 .pdkLog li{padding:1px 3px;font-size:0.9em;}
 .pdkLog li.last{border-bottom:1px solid #FFDAB9;margin:5px;}
-.progressBarContainer{border-top:solid 1px #b1b1b1;width:100%;position:relative;}
-.pdkBar{display:block;height:24px;background:blue;}
-.pdkPercent{color:#AAA;right:0;font-size:2em;font-weight:bold;position:absolute;top:3px;}
+.progressBarContainer{border-top:solid 1px #b1b1b1;width:100%;position:relative;color:#AAAAAA;font-size:2em;font-weight:bold;text-align:right;}
+.pdkBar{background:blue;height:100%;left:0;position:absolute;top:0;z-index:0;}
+.pdkPercent{position: relative;z-index: 10;}

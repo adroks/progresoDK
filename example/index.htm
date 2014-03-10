@@ -1,21 +1,29 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title>ProgresoDK</title>
 	<link rel="stylesheet" href="../style.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+	<script src="../mootools-more-1.4.0.js"></script>
 	<script src="../progresoDK.js"></script>
+	<script>
+		function loadProgressDK(){
+			new progressDK($('pagina'), {
+				urlCrawl: 'ejemplo.json'
+				,urlCreate: 'ejemplo.asp'
+				, funcion: function(element){
+					return element.name + ' ' + element.surname;				
+				}
+			});
+		}
+	</script>
 </head>
 <body>
+	<fieldset>
+		<legend></legend>
+		<input type="button" value="Ejemplo" onclick="loadProgressDK()" />
+	</fieldset>
 	<section id="pagina">
 	</section>
-	<script>
-		window.addEvent('domready', function(){
-			new progressDK($('pagina'), {
-				urlCrawl: 'example.json'
-				, urlCreate: ''
-			});
-		});
-	</script>
 </body>
 </html>
