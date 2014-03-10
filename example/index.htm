@@ -7,13 +7,12 @@
 	<script src="../mootools-more-1.4.0.js"></script>
 	<script src="../progresoDK.js"></script>
 	<script>
+		var dk;
 		function loadProgressDK(){
-			new progressDK($('pagina'), {
-				urlCrawl: 'ejemplo.json'
-				,urlCreate: 'ejemplo.asp'
-				, funcion: function(element){
-					return element.name + ' ' + element.surname;				
-				}
+			dk = new progressDK($('pagina'), {
+				urlCrawl: 'json.asp'
+				,urlCreate: 'crear.asp'
+				, phrase: 'Elemento <b>[value]</b> escaneado.'
 			});
 		}
 	</script>

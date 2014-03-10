@@ -7,6 +7,8 @@
 		, synch: 5 // numero de tareas a la vez
 		, mode: 'default' // modo lista o modo único
 		, funcion: false // podemos pasarle una función que se ejecutará en vez de urlCreate
+		, phrase: '<b>[value]</b> scanned' // esta frase se mostrará cuando se termine de ejecutar cada elemento
+					// [value] se sustituirá por el valor de la primera variable del elemento 
 	}
 	/* las variables que saquemos de cada elemento en urlCrawl, serán las mismas que pidamos en el urlCreate*/
 	,initialize: function(container, opciones){
@@ -54,7 +56,7 @@
 		// asignamos los eventos a los botones
 		this.pdkClose.addEvent('click', function(){// si no ha acabado, se cancelan los siguientes request, y luego se elimina, en caso contrario se elimina directamente
 			this.stop = true;
-			if(this.done==this.length){this.dkHide()}
+			if(this.done==this.array.length){this.dkHide()}
 		}.bind(this));
 		this.pdkPause.addEvent('click', function(){
 			this.pause = !this.pause;
@@ -74,7 +76,6 @@
 			data: this.options.dataCrawl,
 			onComplete: function(array){
 				this.array = array;
-				this.length = array.length;
 				this.dkLoop(0);
 			}.bind(this)
 		}).send();
@@ -86,7 +87,7 @@
 			}.bind(this)).delay(1000);
 		}else{
 			//comprobamos antes que no se haya parado, pausado y que no hayan sobrepasado el numero de elementos del array
-			if(!this.stop && !this.pause && number<this.length){
+			if(!this.stop && !this.pause && number<this.array.length){
 				this.queue++;
 				this.next++;
 				if(this.options.funcion){
@@ -99,16 +100,18 @@
 		}
 	},
 	dkRequest: function(number){
-					console.log(this.options.urlCreate);
-					console.log(this.array[number]);
+		for(var phr in this.array[number]){
+		   var phr = this.options.phrase.replace('[value]', this.array[number][phr]);
+		   break;
+		}
 		new Request({
 			url:	this.options.urlCreate,
 			data:	this.array[number],
 			async:	true,
 			method:	'get',
+			evalResponse: true,
 			onSuccess: function(responseText){
-					console.log(responseText);
-				this.dkSuccess(responseText);
+				this.dkSuccess(phr);
 			}.bind(this)
 		}).send();
 	},
@@ -116,11 +119,11 @@
 		this.done++;
 		this.queue--;
 		this.dkLog(text);//mostramos el resultado de la consulta
-		var perc = Math.round((this.done/this.length) * 100);
+		var perc = Math.round((this.done/this.array.length) * 100);
 		this.pdkPercent.set('html', perc + '%');
 		this.pdkBar.setStyles({'width': perc + '%'});
-		if(this.done==this.length){//mensaje de finalizado
-			this.dkLog('Completado, Total: <b>'+ this.length + '</b>', 1);
+		if(this.done==this.array.length){//mensaje de finalizado
+			this.dkLog('Completado, Total: <b>'+ this.array.length + '</b>', 1);
 			this.pdkPause.setStyles({'display': 'none'});
 		}
 		if(this.stop && this.queue==0){this.dkHide();}
