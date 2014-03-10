@@ -8,6 +8,7 @@
 		, mode: 'default' // modo lista o modo único
 		, funcion: false // podemos pasarle una función que se ejecutará en vez de urlCreate
 	}
+	/* las variables que saquemos de cada elemento en urlCrawl, serán las mismas que pidamos en el urlCreate*/
 	,initialize: function(container, opciones){
 		this.setOptions(opciones);
 		this.elementContainer	= typeOf(container)=='element' ? container : $(container);
