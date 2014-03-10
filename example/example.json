@@ -1,0 +1,4 @@
+﻿Request.JSONP.request_map.request_0([
+	{name:'peter', surname:'lomo'}
+	,{name:'adrok', surname:'milker'}
+]);

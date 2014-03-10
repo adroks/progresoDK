@@ -1,0 +1,21 @@
+﻿
+.progg{border:solid 1px #b1b1b1;width:500px;}
+#progresso{display:block;height:10px;background:blue;}
+
+.pdkContainer{border:1px solid #B1B1B1;clear:both;display:block;width:100%;position:relative;-moz-box-sizing:border-box;box-sizing:border-box;}
+.pdkContainer *{-moz-box-sizing:border-box;box-sizing:border-box;}
+.pdkButton{background-position:center center;background-repeat:no-repeat;height:22px !important;margin:0 !important;position:absolute;border:solid 1px #b1b1b1 !important;top:-1px;width:22px !important;z-index:1000;}
+.pdkClose{right:25px;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAL5JREFUeNqEkksLwkAMhGOpr6KCf98exatofRSs9lBaBdHfVCcYYRl328B3STKb3dmIiMRgA05gKuFIwBmkINLEGrTGJSBW0c3pW2ny6iRaa0g6RMpRbEJBhQYswBzUVNuD0e/UGaio4QnulCt8T/FNdsncSRw6+eURNfTur60UA08u6vgmWYJ3x1VrM+vvimxO1WeO2v6ghi0YmhlZaHJJBV2rcc8CHHjlcjAJrFzJKxebeBcQueLcRNFHgAEAyDJeBhNMe5oAAAAASUVORK5CYII=")}
+.pdkPause{right:53px;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAMCAYAAABfnvydAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAH9JREFUeNqUkM0KQFAQhefelewknkse0NoTUfIGUspCFn7OMHKSklPfPTPnntWIiBSgA5mcSkENKpBosIANlFbIbVdyj8fbR2weyq3Q0zKYz5TNXNjkRV4+9KtwzY4yx4XIPKAs4EJvPlE2aWG15fKFCsespx4fp25Bo6feBRgA3/cXzBszZCMAAAAASUVORK5CYII=")}
+.pdkPause.play{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGlJREFUeNpiZmBguAXEakB8HIh/MOAB/6H4PRDnAzEzIYUwfB6IrYlRCML/gHgREIsTUojuHBZGqAAhsJ+JgTjASMjqR0Dsi8+NP4G4AYi58XlmJxCr4wueh8jWYAMgBVOBWBCfIoAAAwDySTQtuUENJAAAAABJRU5ErkJggg==")}
+
+.pdkLogContainer,.pdkLogOne{clear:both;display:block;width:100%;position:relative;}
+.pdkLogContainer{overflow:auto;height:192px;}
+.pdkLogOne{overflow:hidden;height:20px;}
+ul.pdkLog{width:100%;border:none;margin:0;padding:0;list-style:none;}
+span.pdkLog{display:block;padding:1px 3px;}
+.pdkLog li{padding:1px 3px;font-size:0.9em;}
+.pdkLog li.last{border-bottom:1px solid #FFDAB9;margin:5px;}
+.progressBarContainer{border-top:solid 1px #b1b1b1;width:100%;position:relative;}
+.pdkBar{display:block;height:24px;background:blue;}
+.pdkPercent{color:#AAA;right:0;font-size:2em;font-weight:bold;position:absolute;top:3px;}
